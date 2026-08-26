@@ -1,0 +1,10 @@
+[project]
+name = "git-project-generator"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "pre-commit>=4.6.2",
+    "repo-mapper-rs>=0.5.0",
+]
