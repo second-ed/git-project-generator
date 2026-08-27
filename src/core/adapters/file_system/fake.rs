@@ -50,6 +50,15 @@ impl FileSystem for FakeFileSystem {
     fn is_file(&self, path: &Path) -> bool {
         self.files.contains_key(path)
     }
+
+    fn touch(&mut self, path: &Path) -> Result<(), CoreError> {
+        if self.files.contains_key(path) {
+            Ok(())
+        } else {
+            self.files.insert(path.to_path_buf(), "".to_string());
+            Ok(())
+        }
+    }
 }
 
 #[cfg(test)]

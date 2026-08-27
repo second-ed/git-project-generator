@@ -8,10 +8,12 @@ pub mod core;
 
 fn main() {
     let repo_root = Path::new(env!("CARGO_MANIFEST_DIR")).to_path_buf();
-    let adapter = RealFileSystem;
+    let mut adapter = RealFileSystem;
     let config = adapter
         .read_str(&repo_root.join("config/test.json"))
         .and_then(Config::from_json_str);
+
+    let _ = adapter.touch(&repo_root.join("fake/file.rs"));
 
     let _ = dbg!(config);
 }

@@ -1,13 +1,12 @@
 use crate::core::errors::CoreError;
 use serde::Deserialize;
 
-#[expect(dead_code)]
 #[derive(Debug, Deserialize)]
 pub struct Config {
-    root_dir: String,
-    template_rel_dir: String,
-    project_name: String,
-    files: Vec<String>,
+    pub root_dir: String,
+    pub template_rel_dir: String,
+    pub project_name: String,
+    pub files: Vec<String>,
 }
 
 impl Config {

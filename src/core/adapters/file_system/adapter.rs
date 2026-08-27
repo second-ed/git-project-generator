@@ -6,4 +6,5 @@ pub trait FileSystem {
     fn write_str(&mut self, path: &Path, data: String) -> Result<(), CoreError>;
     fn is_dir(&self, path: &Path) -> bool;
     fn is_file(&self, path: &Path) -> bool;
+    fn touch(&mut self, path: &Path) -> Result<(), CoreError>;
 }
