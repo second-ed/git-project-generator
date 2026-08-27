@@ -1,4 +1,4 @@
-use crate::core::adapters::file_system::{adapter::FileSystem, errors::FileSystemError};
+use crate::core::{adapters::file_system::adapter::FileSystem, errors::CoreError};
 use std::{
     collections::HashMap,
     path::{Path, PathBuf},
@@ -30,15 +30,15 @@ impl Default for FakeFileSystem {
 }
 
 impl FileSystem for FakeFileSystem {
-    fn read_str(&self, path: &Path) -> Result<String, FileSystemError> {
+    fn read_str(&self, path: &Path) -> Result<String, CoreError> {
         if let Some(contents) = self.files.get(path) {
             Ok(contents.to_owned())
         } else {
-            Err(FileSystemError::NotFound(path.to_path_buf()))
+            Err(CoreError::NotFound(path.to_path_buf()))
         }
     }
 
-    fn write_str(&mut self, path: &Path, data: String) -> Result<(), FileSystemError> {
+    fn write_str(&mut self, path: &Path, data: String) -> Result<(), CoreError> {
         self.files.insert(path.to_path_buf(), data.clone());
         Ok(())
     }
