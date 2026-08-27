@@ -104,4 +104,15 @@ mod tests {
         );
         assert_eq!(file_sys.is_dir(Path::new(input_path)), expected_result);
     }
+
+    #[test_case("some_root/a/b.rs", "blah")]
+    #[test_case("some_root/a/c.rs", "")]
+    fn test_fake_touch(input_path: &str, expected_result: &str) {
+        let path = Path::new(input_path);
+        let mut file_sys = FakeFileSystem::from_slice(&[("a/b.rs", "blah")], "some_root");
+        assert!(file_sys.touch(path).is_ok());
+        let res = file_sys.read_str(path);
+        assert!(res.is_ok());
+        assert_eq!(res.unwrap(), expected_result.to_string());
+    }
 }
