@@ -5,6 +5,6 @@ pub mod core;
 
 fn main() {
     let repo_root = Path::new(env!("CARGO_MANIFEST_DIR")).to_path_buf();
-    let adapter = RealFileSystem;
-    run(adapter, repo_root);
+    let mut adapter = RealFileSystem;
+    run(&mut adapter, repo_root);
 }
